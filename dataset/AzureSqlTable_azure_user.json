@@ -1,0 +1,42 @@
+{
+	"name": "AzureSqlTable_azure_user",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseiga",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "varchar"
+			},
+			{
+				"name": "givenName",
+				"type": "varchar"
+			},
+			{
+				"name": "displayName",
+				"type": "varchar"
+			},
+			{
+				"name": "mail",
+				"type": "varchar"
+			},
+			{
+				"name": "jobtitle",
+				"type": "varchar"
+			},
+			{
+				"name": "officelocation",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "iga_azure_user"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

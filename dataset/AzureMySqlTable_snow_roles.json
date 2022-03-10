@@ -1,0 +1,35 @@
+{
+	"name": "AzureMySqlTable_snow_roles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureMySql_1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [
+			{
+				"name": "sys_id_value",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "user_value",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "role_value",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"tableName": "iga_snow_role"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

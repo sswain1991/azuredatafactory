@@ -1,0 +1,30 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseiga",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "roleID",
+				"type": "varchar"
+			},
+			{
+				"name": "appName",
+				"type": "varchar"
+			},
+			{
+				"name": "roleName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "iga_azure_app_roles"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

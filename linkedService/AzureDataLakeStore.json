@@ -1,0 +1,14 @@
+{
+	"name": "AzureDataLakeStore",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://igadatalake.azuredatalakestore.net/webhdfs/v1",
+			"tenant": "9f58333b-9cca-4bd9-a7d8-e151e43b79f3",
+			"subscriptionId": "58334b57-3447-4951-8505-9a3f7873c5ba",
+			"resourceGroupName": "AzureIGA-rg"
+		}
+	}
+}

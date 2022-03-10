@@ -1,0 +1,360 @@
+{
+	"name": "from_snow",
+	"properties": {
+		"activities": [
+			{
+				"name": "from_servicenow_user",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "\"Actual\".\"sys_user\""
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.iga_snow_user"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowSource",
+						"query": "select sys_id_value,last_name_value,active_value,user_name_value,middle_name_value,name_value,department_value,first_name_value,email_value,location_value from Actual.sys_user;"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table dbo.iga_snow_user",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "sys_id_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "last_name_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "last_name_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "active_value",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "active_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "user_name_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "user_name_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "middle_name_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "middle_name_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "name_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "name_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "department_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "department_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "first_name_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "first_name_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "email_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "email_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "location_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "location_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ServiceNowObject_1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable_iga",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "from_servicenow_role",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "\"Actual\".\"ua_user_role_ct\""
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.iga_snow_role"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowSource",
+						"query": "select sys_id_value,user_value,role_value from Actual.sys_user_has_role;"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table dbo.iga_snow_role",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "sys_id_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "sys_id_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "user_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "user_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "role_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "role_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ServiceNowObject_role",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTableigarole",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "from_servicenow_rolename",
+				"description": "from_servicenow_rolename",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "\"Display\".\"sys_user_has_role\""
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.iga_snow_roles_name"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowSource"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table dbo.iga_snow_roles_name",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "sys_id_display_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "sysid",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "user_display_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "user_display_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "role_display_value",
+									"type": "String"
+								},
+								"sink": {
+									"name": "role_display_value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ServiceNowObject_rolename",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTablesnowrolename",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-09T06:30:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

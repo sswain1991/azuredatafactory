@@ -1,0 +1,16 @@
+{
+	"name": "ServiceNowObject_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "igaservicenow",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "ServiceNowObject",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"Actual\".\"sys_user\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

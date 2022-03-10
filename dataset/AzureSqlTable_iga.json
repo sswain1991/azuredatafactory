@@ -1,0 +1,58 @@
+{
+	"name": "AzureSqlTable_iga",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseiga",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "varchar"
+			},
+			{
+				"name": "last_name_value",
+				"type": "varchar"
+			},
+			{
+				"name": "active_value",
+				"type": "varchar"
+			},
+			{
+				"name": "user_name_value",
+				"type": "varchar"
+			},
+			{
+				"name": "middle_name_value",
+				"type": "varchar"
+			},
+			{
+				"name": "name_value",
+				"type": "varchar"
+			},
+			{
+				"name": "department_value",
+				"type": "varchar"
+			},
+			{
+				"name": "first_name_value",
+				"type": "varchar"
+			},
+			{
+				"name": "email_value",
+				"type": "varchar"
+			},
+			{
+				"name": "location_value",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "iga_snow_user"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

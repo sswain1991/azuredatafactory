@@ -1,0 +1,16 @@
+{
+	"name": "ServiceNowObject_role",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "igaservicenow",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "ServiceNowObject",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "\"Display\".\"sys_user_has_role\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

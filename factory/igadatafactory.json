@@ -1,0 +1,9 @@
+{
+	"name": "igadatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4cd27f27-a616-49ee-9418-120cc46930c9",
+		"tenantId": "9f58333b-9cca-4bd9-a7d8-e151e43b79f3"
+	}
+}

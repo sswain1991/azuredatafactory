@@ -1,0 +1,38 @@
+{
+	"name": "AzureSqlTable_role_assignment",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseiga",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "userid",
+				"type": "varchar"
+			},
+			{
+				"name": "displayName",
+				"type": "varchar"
+			},
+			{
+				"name": "appName",
+				"type": "varchar"
+			},
+			{
+				"name": "roleID",
+				"type": "varchar"
+			},
+			{
+				"name": "roleName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "iga_azure_userrole_assignment"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
