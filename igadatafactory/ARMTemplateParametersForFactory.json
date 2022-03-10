@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "igadatafactory"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureMySql_1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabaseiga_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"igaservicenow_password": {
+			"value": ""
+		},
+		"AzureDataLakeStore_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://igadatalake.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore_properties_typeProperties_tenant": {
+			"value": "9f58333b-9cca-4bd9-a7d8-e151e43b79f3"
+		},
+		"AzureDataLakeStore_properties_typeProperties_subscriptionId": {
+			"value": "58334b57-3447-4951-8505-9a3f7873c5ba"
+		},
+		"AzureDataLakeStore_properties_typeProperties_resourceGroupName": {
+			"value": "AzureIGA-rg"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "Administrator"
+		},
+		"igaservicenow_properties_typeProperties_endpoint": {
+			"value": "https://dev91871.service-now.com"
+		},
+		"igaservicenow_properties_typeProperties_username": {
+			"value": "admin"
+		}
+	}
+}

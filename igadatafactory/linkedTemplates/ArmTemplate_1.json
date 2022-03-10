@@ -1,0 +1,2106 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "igadatafactory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/RolesDelimitedText')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "appRole.csv",
+						"container": "azureuserroleextracts"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ServiceNowObject')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "igaservicenow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "ServiceNowObject",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"Actual\".\"sys_user\""
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ServiceNowObject_1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "igaservicenow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "ServiceNowObject",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"Actual\".\"sys_user\""
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ServiceNowObject_role')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "igaservicenow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "ServiceNowObject",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"Display\".\"sys_user_has_role\""
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ServiceNowObject_rolename')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "igaservicenow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "ServiceNowObject",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"Display\".\"sys_user_has_role\""
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_5oa')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "igaservicenow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "ServiceNowObject",
+				"schema": [],
+				"typeProperties": {
+					"tableName": "\"Actual\".\"sys_user\""
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable_onprem')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UserDelimitedText')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "userDetails.csv",
+						"container": "azureuserroleextracts"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UserRoleAssignmentDelimitedText')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "userRoleAssignment.csv",
+						"container": "azureuserroleextracts"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyCSVtoMYSQL_Pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CopyUserCSVtoMYSQL",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "azureuserroleextracts//userDetails.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_azure_user"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_azure_user;",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "id",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "givenName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "displayName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "mail",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 5
+										},
+										"sink": {
+											"name": "jobtitle",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 6
+										},
+										"sink": {
+											"name": "officelocation",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "UserDelimitedText",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable_azure_user",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CopyRolesCSVtoMYSQL",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "azureuserroleextracts//appRole.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_azure_app_roles"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_azure_app_roles;",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "appName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "roleID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "roleName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RolesDelimitedText",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CopyUserRoleAssignmentCSVtoMYSQL",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "azureuserroleextracts//userRoleAssignment.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_azure_userrole_assignment"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_azure_userrole_assignment;",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "userid",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "displayName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "appName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "roleID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 5
+										},
+										"sink": {
+											"name": "roleName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "UserRoleAssignmentDelimitedText",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable_role_assignment",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-08T07:52:39Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UserDelimitedText')]",
+				"[concat(variables('factoryId'), '/datasets/RolesDelimitedText')]",
+				"[concat(variables('factoryId'), '/datasets/UserRoleAssignmentDelimitedText')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_5oa')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_5oa",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "\"Actual\".\"sys_user\""
+							},
+							{
+								"name": "Destination",
+								"value": "output/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ServiceNowSource",
+								"query": "select * from Actual.sys_user"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "employee_number_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 1
+										}
+									},
+									{
+										"source": {
+											"name": "preferred_language_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 2
+										}
+									},
+									{
+										"source": {
+											"name": "sys_created_on_value",
+											"type": "DateTime"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 3
+										}
+									},
+									{
+										"source": {
+											"name": "date_format_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 4
+										}
+									},
+									{
+										"source": {
+											"name": "notification_value",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 5
+										}
+									},
+									{
+										"source": {
+											"name": "sys_class_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 6
+										}
+									},
+									{
+										"source": {
+											"name": "mobile_phone_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 7
+										}
+									},
+									{
+										"source": {
+											"name": "web_service_access_only_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 8
+										}
+									},
+									{
+										"source": {
+											"name": "last_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 9
+										}
+									},
+									{
+										"source": {
+											"name": "company_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 10
+										}
+									},
+									{
+										"source": {
+											"name": "active_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 11
+										}
+									},
+									{
+										"source": {
+											"name": "last_login_time_value",
+											"type": "DateTime"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 12
+										}
+									},
+									{
+										"source": {
+											"name": "failed_attempts_value",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 13
+										}
+									},
+									{
+										"source": {
+											"name": "sys_domain_path_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 14
+										}
+									},
+									{
+										"source": {
+											"name": "schedule_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 15
+										}
+									},
+									{
+										"source": {
+											"name": "default_perspective_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 16
+										}
+									},
+									{
+										"source": {
+											"name": "password_needs_reset_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 17
+										}
+									},
+									{
+										"source": {
+											"name": "sys_mod_count_value",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 18
+										}
+									},
+									{
+										"source": {
+											"name": "sys_created_by_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 19
+										}
+									},
+									{
+										"source": {
+											"name": "user_password_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 20
+										}
+									},
+									{
+										"source": {
+											"name": "locked_out_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 21
+										}
+									},
+									{
+										"source": {
+											"name": "cost_center_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 22
+										}
+									},
+									{
+										"source": {
+											"name": "last_login_value",
+											"type": "DateTime"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 23
+										}
+									},
+									{
+										"source": {
+											"name": "ldap_server_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 24
+										}
+									},
+									{
+										"source": {
+											"name": "sso_source_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 25
+										}
+									},
+									{
+										"source": {
+											"name": "gender_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 26
+										}
+									},
+									{
+										"source": {
+											"name": "user_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 27
+										}
+									},
+									{
+										"source": {
+											"name": "time_zone_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 28
+										}
+									},
+									{
+										"source": {
+											"name": "middle_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 29
+										}
+									},
+									{
+										"source": {
+											"name": "internal_integration_user_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 30
+										}
+									},
+									{
+										"source": {
+											"name": "sys_updated_on_value",
+											"type": "DateTime"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 31
+										}
+									},
+									{
+										"source": {
+											"name": "sys_updated_by_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 32
+										}
+									},
+									{
+										"source": {
+											"name": "time_format_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 33
+										}
+									},
+									{
+										"source": {
+											"name": "sys_id_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 34
+										}
+									},
+									{
+										"source": {
+											"name": "street_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 35
+										}
+									},
+									{
+										"source": {
+											"name": "phone_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 36
+										}
+									},
+									{
+										"source": {
+											"name": "vip_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 37
+										}
+									},
+									{
+										"source": {
+											"name": "state_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 38
+										}
+									},
+									{
+										"source": {
+											"name": "name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 39
+										}
+									},
+									{
+										"source": {
+											"name": "photo_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 40
+										}
+									},
+									{
+										"source": {
+											"name": "sys_tags_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 41
+										}
+									},
+									{
+										"source": {
+											"name": "department_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 42
+										}
+									},
+									{
+										"source": {
+											"name": "introduction_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 43
+										}
+									},
+									{
+										"source": {
+											"name": "title_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 44
+										}
+									},
+									{
+										"source": {
+											"name": "building_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 45
+										}
+									},
+									{
+										"source": {
+											"name": "first_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 46
+										}
+									},
+									{
+										"source": {
+											"name": "sys_domain_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 47
+										}
+									},
+									{
+										"source": {
+											"name": "zip_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 48
+										}
+									},
+									{
+										"source": {
+											"name": "email_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 49
+										}
+									},
+									{
+										"source": {
+											"name": "manager_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 50
+										}
+									},
+									{
+										"source": {
+											"name": "location_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 51
+										}
+									},
+									{
+										"source": {
+											"name": "source_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 52
+										}
+									},
+									{
+										"source": {
+											"name": "country_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 53
+										}
+									},
+									{
+										"source": {
+											"name": "city_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 54
+										}
+									},
+									{
+										"source": {
+											"name": "roles_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 55
+										}
+									},
+									{
+										"source": {
+											"name": "home_phone_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 56
+										}
+									},
+									{
+										"source": {
+											"name": "calendar_integration_value",
+											"type": "Int32"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 57
+										}
+									},
+									{
+										"source": {
+											"name": "last_login_device_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 58
+										}
+									},
+									{
+										"source": {
+											"name": "enable_multifactor_authn_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 59
+										}
+									},
+									{
+										"source": {
+											"name": "last_password_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 60
+										}
+									},
+									{
+										"source": {
+											"name": "edu_status_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 61
+										}
+									},
+									{
+										"source": {
+											"name": "avatar_value",
+											"type": "String"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 62
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_5oa",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_5oa",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-15T12:47:42Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_5oa')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/from_snow_to_datafactory')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "from_servicenow_user",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "\"Actual\".\"sys_user\""
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_snow_user"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ServiceNowSource",
+								"query": "select sys_id_value,last_name_value,active_value,user_name_value,middle_name_value,name_value,department_value,first_name_value,email_value,location_value from Actual.sys_user;"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_snow_user",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "sys_id_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "id",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "last_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "last_name_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "active_value",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "active_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "user_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "user_name_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "middle_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "middle_name_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "name_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "name_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "department_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "department_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "first_name_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "first_name_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "email_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "email_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "location_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "location_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ServiceNowObject_1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable_iga",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "from_servicenow_role",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "\"Actual\".\"ua_user_role_ct\""
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_snow_role"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ServiceNowSource",
+								"query": "select sys_id_value,user_value,role_value from Actual.sys_user_has_role;"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_snow_role",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "sys_id_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "sys_id_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "user_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "user_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "role_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "role_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ServiceNowObject_role",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTableigarole",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "from_servicenow_rolename",
+						"description": "from_servicenow_rolename",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "\"Display\".\"sys_user_has_role\""
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.iga_snow_roles_name"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ServiceNowSource"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table dbo.iga_snow_roles_name",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "sys_id_display_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "sysid",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "user_display_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "user_display_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "role_display_value",
+											"type": "String"
+										},
+										"sink": {
+											"name": "role_display_value",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ServiceNowObject_rolename",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTablesnowrolename",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-03-09T06:30:02Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ServiceNowObject_1')]",
+				"[concat(variables('factoryId'), '/datasets/ServiceNowObject_role')]",
+				"[concat(variables('factoryId'), '/datasets/ServiceNowObject_rolename')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline_AzureAD')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data_Azure AD",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "/exportUser_2022-2-15.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "output/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 1
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 2
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 3
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 4
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 5
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 5
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 6
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 6
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 7
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 7
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 8
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 8
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 9
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 9
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 10
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 10
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 11
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 11
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 12
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 12
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 13
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 13
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 14
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 14
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 15
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 15
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 16
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 16
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 17
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 17
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 18
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 18
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 19
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 19
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 20
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 20
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 21
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 21
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 22
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 22
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 23
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 23
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 24
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 24
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 25
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 25
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 26
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 26
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 27
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 27
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 28
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 28
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 29
+										},
+										"sink": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 29
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText_AD_Source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText_AzureAd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-15T11:19:50Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
